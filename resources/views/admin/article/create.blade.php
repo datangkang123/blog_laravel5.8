@@ -166,7 +166,7 @@
 				},
 				//视频上传按钮
 				toolbarCustomIcons : {
-				file   : "<input type='file' name='video' accept='audio/mp4, video/mp4'/>",
+				file   : "<input type='file' name='video' accept='audio/mp4, video/mp4'/><div class='progress progress-striped active'><div class='progress-bar progress-bar-success' id='jdt' aria-valuenow='25' aria-valuemin='0' aria-valuemax='100' style='width: 0%;'>0%</div></div>",
 				//faicon : "<i class='fa fa-star' onclick='alert('faicon');'></i>"
 				},
 				
@@ -237,8 +237,17 @@
                     },
                     url: '{{ url('admin/article/uploadvideo') }}',
                     data: formData,
-                    contentType: false,
-                    processData: false,
+                    contentType: false,  //必须false才会自动加上正确的Content-Type
+                    processData: false,  //必须false才会避开jQuery对 formdata 的默认处理
+                    //进度条
+                    xhr: function(){ //获取ajaxSettings中的xhr对象，为它的upload属性绑定progress事件的处理函数  
+            		myXhr = $.ajaxSettings.xhr();  
+                if(myXhr.upload){ //检查upload属性是否存在  
+                    //绑定progress事件的回调函数  
+                    myXhr.upload.addEventListener('progress',progressHandlingFunction, false);   
+                }  
+                return myXhr; //xhr对象返回给jQuery使用  
+            },
                     success: function(data) {
                         console.log(data.data[0]);
                         //上传成功，将视频地址插入html5代码中
@@ -250,6 +259,14 @@
                         alert("上传失败，请检查网络后重试");
                     }
                 });
+                
+			function progressHandlingFunction(e){
+				var curr=e.loaded;
+				var total=e.total;
+				jdt = (curr / total * 100).toFixed(1) + '%'; //上传进度百分比，保留1位小数
+				$("#jdt").css("width",jdt);
+				$("#jdt").text(jdt);
+			}
             }
             //提交保存前，删除上传框，防止写入数据库错误
 			$("[type='submit']").click(function(){

@@ -19,6 +19,8 @@ class AppServiceProvider extends ServiceProvider
         $local = config('app.locale');
         app('translator')->setLocale($local);
         Carbon::setLocale($local);
+        
+        \URL::forceScheme('https');//强制https访问
     }
 
     /**

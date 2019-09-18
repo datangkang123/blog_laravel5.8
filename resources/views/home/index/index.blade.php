@@ -49,11 +49,14 @@
                 </div>
                 <div class="col-xs-12 col-md-12 col-lg-12">
                     <div class="row">
-                        <!-- 文章封面图片开始 -->
+                        <!-- 文章封面图片开始 图片懒加载data-src=，有时不兼容浏览器，故注释掉-->
                         <div class="col-sm-6 col-md-6 col-lg-4 hidden-xs b-oa-thumbnail">
                             <figure class="b-oa-pic b-style1">
                                 <a href="{{ $v->url }}" target="_blank">
-                                    <img class="bjy-lazyload" src="{{ cdn_url('/images/home/loading.gif') }}" data-src="{{ config('bjyblog.cdn_domain') . $v->cover }}" alt="{{ config('bjyblog.alt_word') }}" title="{{ config('bjyblog.alt_word') }}">
+        <!--   <img class="bjy-lazyload" src="{{ cdn_url('/images/home/loading.gif') }}" data-src="{{ config('bjyblog.cdn_domain') . $v->cover }}" alt="{{ config('bjyblog.alt_word') }}" title="{{ config('bjyblog.alt_word') }}">
+                       -->             
+               <img class="bjy-lazyload" src="{{ config('bjyblog.cdn_domain') . $v->cover }}" alt="{{ config('bjyblog.alt_word') }}" title="{{ config('bjyblog.alt_word') }}">       
+                                    
                                 </a>
                                 <figcaption>
                                     <a href="{{ url('article', [$v->id]) }}" target="_blank"></a>
