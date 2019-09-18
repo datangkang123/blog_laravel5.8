@@ -2,7 +2,7 @@
 /* CSS Document */
 
 /* 清除内外边距 */
-body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements 结构元素 */
+body, p, blockquote, /* structural elements 结构元素 */
 dl, dt, dd, ul, ol, li, /* list elements 列表元素 */
 pre, /* text formatting elements 文本格式元素 */
 fieldset, lengend, button, input, textarea, /* form elements 表单元素 */
@@ -486,7 +486,7 @@ a {
     /* 文章列表开始 */
     .b-one-article {
         margin-bottom: 15px;
-        padding-top: 20px;
+        padding-top: 10px;
         padding-bottom: 20px;
         background: #fff;
         box-shadow: 0px 1px 2px 0px #E2E2E2;

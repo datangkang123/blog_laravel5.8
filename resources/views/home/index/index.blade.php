@@ -26,9 +26,9 @@
         <!-- 循环文章列表开始 -->
         @foreach($articles as $k => $v)
             <div class="row b-one-article">
-                <h3 class="col-xs-12 col-md-12 col-lg-12">
+                <h4 class="col-xs-12 col-md-12 col-lg-12">
                     <a class="b-oa-title" href="{{ $v->url }}" target="_blank">{{ $v->title }}</a>
-                </h3>
+                </h4>
                 <div class="col-xs-12 col-md-12 col-lg-12 b-date">
                     <ul class="row text-success">
                         <li class="col-xs-5 col-md-2 col-lg-3">

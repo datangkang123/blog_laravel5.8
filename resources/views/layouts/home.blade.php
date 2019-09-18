@@ -34,7 +34,7 @@
             @else
                 <a class="navbar-brand" href="/">
                     <div class="hidden-xs b-nav-background"></div>
-                    <p class="b-logo-word">{{ config('app.name') }}</p>
+                    <p class="b-logo-word">{{ config('app.name') }}&nbsp;&nbsp;</p>
                 </a>
             @endif
         </div>
@@ -169,7 +169,7 @@
         <div class="row b-content">
             <dl class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
                 <dt>{{ __('Rights') }}</dt>
-                <dd>{{ __("Licenses") }}：<a rel="nofollow" href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh">CC BY-NC 4.0</a></dd>
+            <!--    <dd>{{ __("Licenses") }}：<a rel="nofollow" href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh">CC BY-NC 4.0</a></dd> -->
                 <dd>{{ __('Copyright') }}：© 2014-{{ date('Y') }} {{ parse_url(config('app.url'))['host'] }}</dd>
                 @if(!empty(config('bjyblog.admin_email')))
                     <dd>{{ __('Contact Email') }}：<a href="mailto:{!! config('bjyblog.admin_email') !!}">{!! config('bjyblog.admin_email') !!}</a></dd>
@@ -183,16 +183,16 @@
                 <dt>{{ __('Structure') }}</dt>
                 <dd>{{ __('Project Name') }}：<a rel="nofollow" href="https://github.com/baijunyao/laravel-bjyblog" target="_blank">laravel-bjyblog</a></dd>
                 <dd>{{ __('Branch') }}：{{ config('bjyblog.version') }}-{{ config('bjyblog.branch') }}</dd>
-                <dd>{{ __('Project Author') }}：<a href="https://baijunyao.com">{{ __('Junyao Bai') }}</a></dd>
+                <!-- <dd>{{ __('Project Author') }}：<a href="https://baijunyao.com">{{ __('Junyao Bai') }}</a></dd>
                 <dd>{{ __('Theme Name') }}：<a rel="nofollow" href="https://github.com/baijunyao/blog-theme-blueberry">blog-theme-blueberry</a></dd>
-                <dd>{{ __('Theme Author') }}：<a href="https://baijunyao.com">{{ __('Junyao Bai') }}</a></dd>
+                <dd>{{ __('Theme Author') }}：<a href="https://baijunyao.com">{{ __('Junyao Bai') }}</a></dd>  -->
             </dl>
 
             <dl class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <dt>{{ __('Counts') }}</dt>
                 <dd>{{ __('Article Counts') }}：{{ $articleCount }}</dd>
                 <dd>{{ __('Comment Counts') }}：{{ $commentCount }}</dd>
-                <dd>{{ __('User Counts') }}：{{ $socialiteUserCount }}</dd>
+                <!--<dd>{{ __('User Counts') }}：{{ $socialiteUserCount }}</dd> -->
                 <dd>{{ __('Note Counts') }}：{{ $chatCount }}</dd>
             </dl>
         </div>

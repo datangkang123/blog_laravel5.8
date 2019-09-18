@@ -80,6 +80,8 @@ Route::namespace('Admin')->prefix('admin')->middleware('admin.auth')->group(func
         Route::post('update/{id}', 'ArticleController@update');
         // 上传图片
         Route::post('uploadImage', 'ArticleController@uploadImage');
+        // 上传视频
+        Route::post('uploadvideo', 'ArticleController@uploadvideo');
         // 删除文章
         Route::get('destroy/{id}', 'ArticleController@destroy');
         // 恢复删除的文章

@@ -64,6 +64,7 @@ class ArticleController extends Controller
     public function uploadImage()
     {
         $result = Upload::image('editormd-image-file', 'uploads/article');
+        //editor工具构造的file字段是editormd-image-file，如果需要处理图片，或上传视频，需要改/vendor/baijunyao/laravel-upload/src/upload.php文件
         if ($result['status_code'] === 200) {
             $data = [
                 'success' => 1,
@@ -79,6 +80,81 @@ class ArticleController extends Controller
         }
 
         return response()->json($data);
+    }
+    
+    //上传视频
+        public function uploadvideo(Request $request)
+    {
+        $allowExtension = ['mp4','mov','mpg','mpeg','flv'];
+        if (!$request->isMethod('POST')) { //判断是否是POST上传
+			$data=[
+			'status_code' => 500,
+			'message' => '请求非法！'
+		];
+		return $data;
+        }
+        // 判断请求中是否包含name=video的文件
+        $file = $request->file('video');
+        if (!$file->isValid()) {
+			$data=[
+			'status_code' => 500,
+			'message' => '上传的文件无效！'
+		];
+		return $data;
+        }	
+        	
+		// 先去除两边空格
+        $path = trim('uploads/article', '/');
+        // 判断是否需要生成日期子目录
+        $childPath = true;//设置是否要生成子目录
+        $path = $childPath ? $path.'/'.date('Ymd') : $path;
+        // 获取目录的绝对路径
+        $publicPath = public_path($path.'/');
+        // 如果目录不存在；先创建目录
+        is_dir($publicPath) || mkdir($publicPath, 0755, true);
+        $ext = $file->getClientOriginalExtension();//获取文件扩展名
+		// 获取上传的文件名
+		$oldName = $file->getClientOriginalName();
+		// 获取文件后缀
+		$extension = strtolower($file->getClientOriginalExtension());
+		// 判断是否是允许的文件类型
+		if (!empty($allowExtension) && !in_array($extension, $allowExtension)) {
+			$data=[
+                    'status_code' => 500,
+                    'message' => $oldName . '的文件类型不被允许'
+                ];
+                return $data;
+            }
+		// 组合新的文件名
+		$md5name = md5_file($file);//获取文件MD5值，防止重复上传
+		$newName = $md5name . '.' . $extension;
+		//$newName = uniqid() . '.' . $extension;//随机文件名
+		if (file_exists($publicPath.$newName)){//如果文件已存在，则直接返回文件地址
+			$success[] = [
+				'name' => $oldName,
+				'path' => '/'.$path.'/'.$newName
+                ];
+			}else{
+		if (!$file->move($publicPath, $newName)) {  // 第一次上传，移动文件，判断是否失败
+			$data=[
+			'status_code' => 500,
+			'message' => '保存文件失败'
+			];
+			return $data;
+            } else {
+			$success[] = [
+				'name' => $oldName,
+				'path' => '/'.$path.'/'.$newName
+                ];
+            }
+          }
+        //上传成功
+        $data=[
+            'status_code' => 200,
+            'message' => '上传成功',
+            'data' => $success
+        ];
+        return $data;
     }
 
     /**

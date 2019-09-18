@@ -13,7 +13,7 @@
             @if(auth()->guard('admin')->check())
                 <a class="fa fa-edit b-edit-icon" href="{{ url('admin/article/edit', [$article->id]) }}"></a>
             @endif
-            <h2 class="col-xs-12 col-md-12 col-lg-12 b-title">{{ $article->title }}</h2>
+            <h3 class="col-xs-12 col-md-12 col-lg-12 b-title">{{ $article->title }}</h3>
             <div class="col-xs-12 col-md-12 col-lg-12">
                 <ul class="row b-metadata">
                     <li class="col-xs-5 col-md-2 col-lg-3"><i class="fa fa-user"></i> {{ $article->author }}</li>
